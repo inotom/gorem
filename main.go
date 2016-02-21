@@ -14,6 +14,7 @@ import (
 	"image/png"
 	"log"
 	"net/http"
+	"os"
 	"path/filepath"
 	"strconv"
 	"sync"
@@ -182,6 +183,14 @@ func main() {
 
 	http.Handle("/", &templateHandler{filename: "home.html"})
 	http.HandleFunc("/lorem", makeImageHandler)
+
+	if *addr == "" {
+		port := os.Getenv("PORT")
+		*addr = ":" + port
+		if port == "" {
+			log.Fatalln("$PORT must be set")
+		}
+	}
 
 	// Web サーバを開始
 	log.Println("Webサーバを開始します。ポート：", *addr)
