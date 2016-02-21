@@ -13,7 +13,7 @@ clean :
 
 .PHONY : run
 run :
-	$(OUT) -addr=":8080"
+	./$(OUT) -addr=":8080"
 
 .PHONY : help
 help :
