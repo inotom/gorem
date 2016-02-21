@@ -11,6 +11,10 @@ build:
 clean :
 	$(RM) $(OUT)
 
+.PHONY : run
+run :
+	$(OUT) -addr=":8080"
+
 .PHONY : help
 help :
 	@echo "Usage: make <task>"
