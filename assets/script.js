@@ -6,7 +6,11 @@
   var $btn = $('#btn-create'),
       $thumb = $('#thumb'),
       $fontSize = $('#fs'),
-      $fontSizeOut = $('#fs-out');
+      $fontSizeOut = $('#fs-out'),
+      $width = $('#w'),
+      $height = $('#h'),
+      $text = $('#s'),
+      $hasProp = $('#p');
 
   $(function() {
 
@@ -19,8 +23,8 @@
     $btn.on('click', function() {
       $thumb.hide();
       var $img = $('<img>');
-      var imgURI = '/lorem?w=' + $('#w').val() + '&h=' + $('#h').val() + '&fs=' + $fontSize.val();
-      var text = $('#s').val();
+      var imgURI = '/lorem?w=' + $width.val() + '&h=' + $height.val() + '&fs=' + $fontSize.val();
+      var text = $text.val();
       if (text.length > 0) {
       imgURI += '&s=' + text.replace(/\s/g, '+')
                             .replace(/&/g, '＆')
@@ -28,7 +32,7 @@
                             .replace(/;/g, '；')
                             .replace(/%/g, '％');
       }
-      var hasProp = $('#p').prop('checked');
+      var hasProp = $hasProp.prop('checked');
       if (hasProp) {
         imgURI += '&p=1';
       }
