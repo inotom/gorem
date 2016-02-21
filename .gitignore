@@ -27,4 +27,5 @@ _testmain.go
 .DS_Store
 *~
 *.log
+vendor
 gorem
