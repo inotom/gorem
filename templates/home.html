@@ -5,58 +5,9 @@
 <meta name="viewport" content="width=device-width">
 <meta name="description" content="">
 <meta name="keywords" content="">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="assets/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="assets/style.css">
 <title>Lorem Image Generator</title>
-<style>
-html {
-  font-size: 62.5%;
-}
-.site-name {
-  margin: 30px auto;
-  color: #446;
-  font-size: 4.0rem;
-  font-style: italic;
-  font-family: Georgia, serif;
-  letter-spacing: 1px;
-  text-align: center;
-}
-.img-type-box {
-  padding-top: 7px;
-}
-.img-type-box label {
-  padding-left: 5px;
-  margin-right: 20px;
-}
-.font-size-value-box,
-.font-size-range-box {
-  padding-top: 7px;
-}
-.thumb {
-  margin: 20px auto 60px;
-  text-align: center;
-}
-.copyright {
-  color: #999;
-  font-size: 1.0rem;
-  font-style: italic;
-  font-family: Georgia, serif;
-  text-align: center;
-}
-
-@media only screen and (max-width: 640px) {
-  .site-name {
-    margin: 15px auto;
-    font-size: 2.0rem;
-  }
-  .btn-create {
-    width: 100%;
-  }
-  .thumb img {
-    max-width: 100%;
-    height: auto;
-  }
-}
-</style>
 </head>
 <body>
 
@@ -118,53 +69,7 @@ html {
   </div>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<script>
-(function($) {
-
-  var DEFAULT_FONT_SIZE = 14;
-
-  var $btn = $('#btn-create'),
-      $thumb = $('#thumb'),
-      $fontSize = $('#fs'),
-      $fontSizeOut = $('#fs-out');
-
-  $(function() {
-
-    $fontSize.val(DEFAULT_FONT_SIZE);
-    $fontSize.on('input', function() {
-      var fs = $(this).val()
-      $fontSizeOut.text(fs);
-    });
-
-    $btn.on('click', function() {
-      $thumb.hide();
-      var $img = $('<img>');
-      var imgURI = '/lorem?w=' + $('#w').val() + '&h=' + $('#h').val() + '&fs=' + $fontSize.val();
-      var text = $('#s').val();
-      if (text.length > 0) {
-      imgURI += '&s=' + text.replace(/\s/g, '+')
-                            .replace(/&/g, '＆')
-                            .replace(/=/g, '＝')
-                            .replace(/;/g, '；')
-                            .replace(/%/g, '％');
-      }
-      var hasProp = $('#p').prop('checked');
-      if (hasProp) {
-        imgURI += '&p=1';
-      }
-      var imgType = $('input[name="t"]:checked').val();
-      if (imgType) {
-        imgURI += '&t=' + imgType;
-      }
-      $img.attr('src', imgURI);
-      $thumb
-        .empty()
-        .append($img)
-        .fadeIn();
-    });
-  });
-})(jQuery);
-</script>
+<script type="text/javascript" src="assets/jquery.min.js"></script>
+<script type="text/javascript" src="assets/script.js"></script>
 </body>
 </html>

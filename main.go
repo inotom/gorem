@@ -183,6 +183,9 @@ func main() {
 
 	http.Handle("/", &templateHandler{filename: "home.html"})
 	http.HandleFunc("/lorem", makeImageHandler)
+	http.Handle("/assets/",
+		http.StripPrefix("/assets",
+			http.FileServer(http.Dir("./assets"))))
 
 	if *addr == "" {
 		port := os.Getenv("PORT")
