@@ -181,7 +181,15 @@ func main() {
 	var addr = flag.String("addr", "", "アプリケーションのアドレス")
 	flag.Parse() // フラグを解析
 
-	http.Handle("/", &templateHandler{filename: "home.html"})
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/" {
+			http.NotFound(w, r)
+			return
+		}
+		t := &templateHandler{filename: "home.html"}
+		t.ServeHTTP(w, r)
+	})
+
 	http.HandleFunc("/lorem", makeImageHandler)
 	http.Handle("/assets/",
 		http.StripPrefix("/assets",
