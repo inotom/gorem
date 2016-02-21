@@ -1,0 +1,37 @@
+{
+	"ImportPath": "github.com/inotom/gorem",
+	"GoVersion": "go1.6",
+	"Deps": [
+		{
+			"ImportPath": "github.com/golang/freetype/raster",
+			"Comment": "release-126-gaeca2bb",
+			"Rev": "aeca2bb589206cb204bdbc8891b99737265d3fff"
+		},
+		{
+			"ImportPath": "github.com/golang/freetype/truetype",
+			"Comment": "release-126-gaeca2bb",
+			"Rev": "aeca2bb589206cb204bdbc8891b99737265d3fff"
+		},
+		{
+			"ImportPath": "github.com/llgcode/draw2d",
+			"Comment": "v1-69-g0545b30",
+			"Rev": "0545b30698e15720d228aa99e3b48151ee7e0943"
+		},
+		{
+			"ImportPath": "golang.org/x/image/draw",
+			"Rev": "7c492694a6443a92fd349fda0c4c7b587040f161"
+		},
+		{
+			"ImportPath": "golang.org/x/image/font",
+			"Rev": "7c492694a6443a92fd349fda0c4c7b587040f161"
+		},
+		{
+			"ImportPath": "golang.org/x/image/math/f64",
+			"Rev": "7c492694a6443a92fd349fda0c4c7b587040f161"
+		},
+		{
+			"ImportPath": "golang.org/x/image/math/fixed",
+			"Rev": "7c492694a6443a92fd349fda0c4c7b587040f161"
+		}
+	]
+}
