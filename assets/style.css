@@ -16,8 +16,11 @@ html {
   padding-top: 7px;
 }
 .img-type-box label {
-  padding-left: 5px;
-  margin-right: 20px;
+  padding-left: 3px;
+  margin-right: 10px;
+}
+.image-size-label {
+  padding-right: 3px;
 }
 .font-size-value-box,
 .font-size-range-box {
