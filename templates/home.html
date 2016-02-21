@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<title>Lorem Image Generator</title>
+<style>
+html {
+  font-size: 62.5%;
+}
+.site-name {
+  margin: 30px auto;
+  color: #446;
+  font-size: 4.0rem;
+  font-style: italic;
+  font-family: Georgia, serif;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.img-type-box {
+  padding-top: 7px;
+}
+.img-type-box label {
+  padding-left: 5px;
+  margin-right: 20px;
+}
+.font-size-value-box,
+.font-size-range-box {
+  padding-top: 7px;
+}
+.thumb {
+  margin: 20px auto 60px;
+  text-align: center;
+}
+.copyright {
+  color: #999;
+  font-size: 1.0rem;
+  font-style: italic;
+  font-family: Georgia, serif;
+  text-align: center;
+}
+
+@media only screen and (max-width: 640px) {
+  .site-name {
+    margin: 15px auto;
+    font-size: 2.0rem;
+  }
+  .btn-create {
+    width: 100%;
+  }
+  .thumb img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      <h1 class="site-name">Lorem Image Generator</h1>
+      <div class="form-horizontal">
+        <div class="form-group">
+          <label class="col-sm-3 col-xs-12 control-label" for="s">テキスト</label>
+          <div class="col-sm-9 col-xs-12">
+            <input class="form-control" type="text" name="s" id="s" value="Sample Image" size="40">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 col-xs-12 control-label" for="w">幅</label>
+          <div class="col-sm-4 col-xs-12">
+            <input class="form-control" type="number" name="w" id="w" value="180" size="5" min="1" pattern="^[1-9][0-9]*$">
+          </div>
+          <label class="col-sm-1 col-xs-12 control-label" for="h">高さ</label>
+          <div class="col-sm-4 col-xs-12">
+            <input class="form-control" type="number" name="h" id="h" value="120" size="5" min="1" pattern="^[1-9][0-9]*$">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 col-xs-12 control-label">画像タイプ</label>
+          <div class="col-sm-4 col-xs-12 img-type-box">
+            <input type="radio" name="t" id="t-jpg" value="jpg" checked>
+            <label for="t-jpg">JPEG</label>
+            <input type="radio" name="t" id="t-png" value="png">
+            <label for="t-png">PNG</label>
+            <input type="radio" name="t" id="t-gif" value="gif">
+            <label for="t-gif">GIF</label>
+          </div>
+          <div class="col-sm-5 col-xs-12">
+            <input type="checkbox" name="p" id="p" value="1">
+            <label class="control-label" for="p">画像サイズ(幅x高さ)を表示</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-3 col-xs-12 control-label" for="fs">フォントサイズ</label>
+          <div class="col-sm-7 col-xs-12 font-size-range-box">
+            <input type="range" name="fs" id="fs" value="14" min="10" max="50" step="1">
+          </div>
+          <div class="col-sm-2 col-xs-12 font-size-value-box">
+            <span id="fs-out">14</span> (10 ~ 50)
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9 col-sx-offset-0 col-xs-12">
+            <input class="btn btn-primary btn-create" type="button" id="btn-create" value="画像作成">
+          </div>
+        </div>
+      </div>
+      <div class="thumb" id="thumb"></div>
+      <hr>
+      <p class="copyright">Copyright(c) Serendip</p>
+    </div>
+  </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script>
+(function($) {
+
+  var DEFAULT_FONT_SIZE = 14;
+
+  var $btn = $('#btn-create'),
+      $thumb = $('#thumb'),
+      $fontSize = $('#fs'),
+      $fontSizeOut = $('#fs-out');
+
+  $(function() {
+
+    $fontSize.val(DEFAULT_FONT_SIZE);
+    $fontSize.on('input', function() {
+      var fs = $(this).val()
+      $fontSizeOut.text(fs);
+    });
+
+    $btn.on('click', function() {
+      $thumb.hide();
+      var $img = $('<img>');
+      var imgURI = '/lorem?w=' + $('#w').val() + '&h=' + $('#h').val() + '&fs=' + $fontSize.val();
+      var text = $('#s').val();
+      if (text.length > 0) {
+      imgURI += '&s=' + text.replace(/\s/g, '+')
+                            .replace(/&/g, '＆')
+                            .replace(/=/g, '＝')
+                            .replace(/;/g, '；')
+                            .replace(/%/g, '％');
+      }
+      var hasProp = $('#p').prop('checked');
+      if (hasProp) {
+        imgURI += '&p=1';
+      }
+      var imgType = $('input[name="t"]:checked').val();
+      if (imgType) {
+        imgURI += '&t=' + imgType;
+      }
+      $img.attr('src', imgURI);
+      $thumb
+        .empty()
+        .append($img)
+        .fadeIn();
+    });
+  });
+})(jQuery);
+</script>
+</body>
+</html>
